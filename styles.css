@@ -1,0 +1,144 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Background */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('earth (2).jpg'); /* Earth image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #fff; /* White text for contrast */
+}
+
+/* Navbar Styles */
+/* Navbar Styles - Lower Transparency for Bottom Border */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 119, 255, 1); /* Full opacity for the main navbar */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 4px solid rgba(0, 119, 255, 0.3);
+    border-radius: 0px 0px 30px 30px;
+}
+
+.navbar .logo {
+    height: 100px; /* Adjusted logo size */
+    margin-left: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.3); /* Lower transparency for links */
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: #00d4ff; /* Lighter blue background on hover */
+    color: #003366;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links .active {
+    background-color: #00d4ff;
+    color: #003366;
+}
+
+
+/* Button Hover */
+.nav-links .btn:hover {
+    background: rgba(0, 120, 180, 0.9); /* Slightly darker blue */
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: url('assets/images/hero-bg.jpg') center/cover no-repeat;
+    color: white;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+    
+}
+
+/* Hero Text */
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+/* Hero Buttons */
+.hero .btn {
+    margin-top: 1.5rem;
+    background: #00d4ff; /* Light cyan for contrast */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.hero .btn:hover {
+    background: #0077ff; /* Darker blue on hover */
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.auth-buttons .btn {
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #00d4ff; /* Light cyan for contrast */
+    color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.auth-buttons .btn:hover {
+    background-color: #0077ff; /* Darker blue on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}

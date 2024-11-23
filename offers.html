@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your general stylesheet -->
+    <link rel="stylesheet" href="offers.css"> <!-- Link to the offers-specific stylesheet -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <img src="logo.png" alt="Logo" class="logo"> <!-- Logo Image -->
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="ai-manager.html">AI Travel Manager</a>
+            <a href="offers.html" class="active">Offers</a>
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Main Content for Offers -->
+    <div class="offers">
+        <h1>Find Your Perfect Travel Offer</h1>
+        <p>Enter your details to receive the best travel offers tailored to your needs.</p>
+
+        <!-- Form Container -->
+        <div class="form-container" id="form-container">
+            <h3>Enter Your Details:</h3>
+            <form id="offerForm" onsubmit="submitForm(event)">
+                <label for="current-location">Where do you live?</label>
+                <input type="text" id="current-location" name="current-location" required>
+
+                <label for="destination">Where do you want to go?</label>
+                <input type="text" id="destination" name="destination" required>
+
+                <label for="budget">What is your budget?</label>
+                <input type="number" id="budget" name="budget" required>
+
+                <label for="passengers">How many passengers?</label>
+                <input type="number" id="passengers" name="passengers" required>
+
+                <button type="submit">Find Offers</button>
+            </form>
+        </div>
+
+        <!-- Offers Section (to be dynamically updated) -->
+        <div id="offers-container" class="offers-container"></div>
+        <div id="no-offers-message" class="no-offers-message" style="display: none;">
+            <h2>No offers available for your selected destination and budget.</h2>
+        </div>
+    </div>
+
+    <script>
+        const predefinedTrips = [
+    {
+        title: "Trip to Paris",
+        destination: "Paris",
+        description: "Enjoy a romantic vacation in the heart of Europe.",
+        price: 1200,  // Price per person
+        image: "paris.jpg"
+    },
+    {
+        title: "Adventure in Japan",
+        destination: "Japan",
+        description: "Explore the beautiful landscapes and culture of Japan.",
+        price: 1500,
+        image: "japan.jpg"
+    },
+    {
+        title: "Beach Holiday in Bali",
+        destination: "Bali",
+        description: "Relax on the pristine beaches of Bali.",
+        price: 900,
+        image: "https://via.placeholder.com/300x200?text=Bali+Beach+Holiday"
+    },
+    {
+        title: "Safari in Kenya",
+        destination: "Kenya",
+        description: "An unforgettable wildlife safari in the heart of Africa.",
+        price: 1800,
+        image: "https://via.placeholder.com/300x200?text=Kenya+Safari"
+    },
+    {
+        title: "Weekend Getaway to Mexico",
+        destination: "Mexico",
+        description: "A relaxing weekend in sunny Mexico.",
+        price: 200,
+        image: "https://via.placeholder.com/300x200?text=Mexico+Getaway"
+    },
+    {
+        title: "Cultural Trip to India",
+        destination: "India",
+        description: "Immerse yourself in the culture of India.",
+        price: 350,
+        image: "https://via.placeholder.com/300x200?text=India+Cultural+Trip"
+    },
+    {
+        title: "Trekking in Nepal",
+        destination: "Nepal",
+        description: "Conquer the Himalayas on an exciting trekking adventure.",
+        price: 800,
+        image: "https://via.placeholder.com/300x200?text=Nepal+Trekking"
+    },
+    {
+        title: "Historical Tour of Egypt",
+        destination: "Egypt",
+        description: "Discover the ancient wonders of Egypt, including the Pyramids.",
+        price: 1000,
+        image: "https://via.placeholder.com/300x200?text=Egypt+Historical+Tour"
+    },
+    {
+        title: "Island Hopping in Greece",
+        destination: "Greece",
+        description: "Explore the islands of Greece, each with its own charm.",
+        price: 950,
+        image: "https://via.placeholder.com/300x200?text=Greece+Island+Hopping"
+    },
+    {
+        title: "City Break in London",
+        destination: "London",
+        description: "Visit iconic landmarks like the Big Ben and the London Eye.",
+        price: 700,
+        image: "https://via.placeholder.com/300x200?text=London+City+Break"
+    },
+    {
+        title: "Adventure in Iceland",
+        destination: "Iceland",
+        description: "Explore glaciers, volcanoes, and hot springs in Iceland.",
+        price: 1300,
+        image: "https://via.placeholder.com/300x200?text=Iceland+Adventure"
+    },
+    {
+        title: "Luxury in Dubai",
+        destination: "Dubai",
+        description: "Experience the luxury and grandeur of Dubai.",
+        price: 2500,
+        image: "https://via.placeholder.com/300x200?text=Dubai+Luxury"
+    },
+    {
+        title: "Scenic Road Trip in New Zealand",
+        destination: "New Zealand",
+        description: "Enjoy the breathtaking landscapes of New Zealand on a road trip.",
+        price: 1200,
+        image: "https://via.placeholder.com/300x200?text=New+Zealand+Road+Trip"
+    },
+    {
+        title: "Skiing in Switzerland",
+        destination: "Switzerland",
+        description: "Hit the slopes and enjoy the winter beauty of Switzerland.",
+        price: 1500,
+        image: "https://via.placeholder.com/300x200?text=Switzerland+Skiing"
+    },
+    {
+        title: "Cultural Tour of Morocco",
+        destination: "Morocco",
+        description: "Explore the rich culture, markets, and architecture of Morocco.",
+        price: 600,
+        image: "https://via.placeholder.com/300x200?text=Morocco+Cultural+Tour"
+    },
+    {
+        title: "Cruise to the Caribbean",
+        destination: "Caribbean",
+        description: "Sail through crystal-clear waters to the most beautiful islands.",
+        price: 1300,
+        image: "https://via.placeholder.com/300x200?text=Caribbean+Cruise"
+    },
+    {
+        title: "Wilderness Adventure in Canada",
+        destination: "Canada",
+        description: "Explore the natural beauty of Canada through hiking and canoeing.",
+        price: 1100,
+        image: "https://via.placeholder.com/300x200?text=Canada+Wilderness+Adventure"
+    },
+    {
+        title: "Wine Tasting in Italy",
+        destination: "Italy",
+        description: "Indulge in wine tasting tours in the famous vineyards of Italy.",
+        price: 950,
+        image: "https://via.placeholder.com/300x200?text=Italy+Wine+Tasting"
+    },
+    {
+        title: "Northern Lights in Norway",
+        destination: "Norway",
+        description: "Witness the magical Northern Lights in the Norwegian skies.",
+        price: 1300,
+        image: "https://via.placeholder.com/300x200?text=Norway+Northern+Lights"
+    },
+    {
+        title: "Hiking in the Swiss Alps",
+        destination: "Switzerland",
+        description: "Hike through the stunning Swiss Alps and enjoy the fresh air.",
+        price: 900,
+        image: "https://via.placeholder.com/300x200?text=Swiss+Alps+Hiking"
+    },
+    {
+        title: "Luxury Stay in Maldives",
+        destination: "Maldives",
+        description: "Stay in an overwater villa and enjoy a luxurious vacation.",
+        price: 2500,
+        image: "https://via.placeholder.com/300x200?text=Maldives+Luxury+Stay"
+    },
+    {
+        title: "Adventure in Australia",
+        destination: "Australia",
+        description: "Explore the wildlife and coastlines of Australia.",
+        price: 1800,
+        image: "https://via.placeholder.com/300x200?text=Australia+Adventure"
+    },
+    {
+        title: "Romantic Escape to Venice",
+        destination: "Venice",
+        description: "A romantic gondola ride through the canals of Venice.",
+        price: 1000,
+        image: "https://via.placeholder.com/300x200?text=Venice+Romantic+Escape"
+    },
+    {
+        title: "Exploring Ancient Rome",
+        destination: "Italy",
+        description: "Step back in time and discover the wonders of ancient Rome.",
+        price: 800,
+        image: "https://via.placeholder.com/300x200?text=Rome+Ancient+Exploration"
+    },
+    {
+        title: "Cultural Trip to Peru",
+        destination: "Peru",
+        description: "Explore the rich culture and ancient ruins of Peru.",
+        price: 700,
+        image: "https://via.placeholder.com/300x200?text=Peru+Cultural+Trip"
+    },
+    {
+        title: "Tropical Paradise in Seychelles",
+        destination: "Seychelles",
+        description: "Relax on the stunning beaches of Seychelles.",
+        price: 2200,
+        image: "https://via.placeholder.com/300x200?text=Seychelles+Tropical+Paradise"
+    },
+    {
+        title: "Historical Greece",
+        destination: "Greece",
+        description: "Visit the ruins of ancient Greece and immerse yourself in history.",
+        price: 850,
+        image: "https://via.placeholder.com/300x200?text=Greece+Historical+Tour"
+    },
+    {
+        title: "Luxury Retreat in Bhutan",
+        destination: "Bhutan",
+        description: "Experience the peaceful and serene beauty of Bhutan.",
+        price: 2500,
+        image: "https://via.placeholder.com/300x200?text=Bhutan+Luxury+Retreat"
+    },
+    {
+        title: "Road Trip through the USA",
+        destination: "USA",
+        description: "Take a road trip across the iconic landmarks of the USA.",
+        price: 1500,
+        image: "https://via.placeholder.com/300x200?text=USA+Road+Trip"
+    },
+    {
+        title: "Exploration in Madagascar",
+        destination: "Madagascar",
+        description: "Discover the unique wildlife and landscapes of Madagascar.",
+        price: 1300,
+        image: "https://via.placeholder.com/300x200?text=Madagascar+Exploration"
+    },
+    {
+        title: "Cultural Experience in Indonesia",
+        destination: "Indonesia",
+        description: "Experience the diverse culture and stunning landscapes of Indonesia.",
+        price: 1000,
+        image: "https://via.placeholder.com/300x200?text=Indonesia+Cultural+Experience"
+    },
+    {
+        title: "Relax in the Caribbean",
+        destination: "Caribbean",
+        description: "Kick back and relax on the beautiful Caribbean islands.",
+        price: 1200,
+        image: "https://via.placeholder.com/300"
+
+            }
+        ];
+
+        // Handle the form submission
+        function submitForm(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+            
+            // Get input values
+            const currentLocation = document.getElementById('current-location').value;
+            const destination = document.getElementById('destination').value;
+            const budget = parseInt(document.getElementById('budget').value);
+            const passengers = parseInt(document.getElementById('passengers').value);
+
+            // Remove the form container after submitting
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('no-offers-message').style.display = 'none';
+
+            // Generate and display offers based on user input
+            const offers = filterOffers(destination, budget, passengers);
+
+            // Display the generated offers or show "No offers" message if none match
+            const offersContainer = document.getElementById('offers-container');
+            offersContainer.innerHTML = ''; // Clear any existing offers
+
+            if (offers.length > 0) {
+                offers.forEach(offer => {
+                    const offerCard = document.createElement('div');
+                    offerCard.classList.add('offer-card');
+                    offerCard.innerHTML = `
+                        <img src="${offer.image}" alt="${offer.title}">
+                        <h2>${offer.title}</h2>
+                        <p>${offer.description}</p>
+                        <p><strong>Price per person:</strong> $${offer.price}</p>
+                        <p><strong>Total cost for ${offer.passengers} passengers:</strong> $${offer.totalCost}</p>
+                        <button>Book Now</button>
+                    `;
+                    offersContainer.appendChild(offerCard);
+                });
+            } else {
+                document.getElementById('no-offers-message').style.display = 'block'; // Show no offers message
+            }
+        }
+
+        // Function to filter offers based on user input (destination, budget, passengers)
+        function filterOffers(destination, budget, passengers) {
+            // Filter trips based on the destination and budget
+            return predefinedTrips.filter(offer => {
+                const isDestinationMatch = offer.destination.toLowerCase() === destination.toLowerCase();
+                const totalCost = offer.price * passengers; // Calculate total cost for all passengers
+                const isBudgetMatch = totalCost <= budget; // Only show offers with total cost <= budget
+
+                // Add the total cost and passengers data to the offer object
+                offer.totalCost = totalCost;
+                offer.passengers = passengers;
+
+                return isDestinationMatch && isBudgetMatch;
+            });
+        }
+    </script>
+</body>
+</html>
