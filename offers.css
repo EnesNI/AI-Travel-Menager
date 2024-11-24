@@ -1,8 +1,8 @@
 /* General Reset */
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(180deg, #ffffff, #f4f4f4);
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Subtle gradient */
     color: #333;
 }
 
@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: rgba(0, 119, 255, 1); /* Full opacity for the main navbar */
+    background: rgba(0, 119, 255, 1);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     position: sticky;
     top: 0;
@@ -22,7 +22,7 @@ body {
 }
 
 .navbar .logo {
-    height: 100px; /* Adjusted logo size */
+    height: 100px;
     margin-left: 50px;
     width: auto;
     object-fit: contain;
@@ -36,58 +36,85 @@ body {
 .nav-links a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
     background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
 }
 
 /* Offers Section */
 .offers {
     text-align: center;
-    padding: 3rem 1rem;
-    background: #e8f6ff;
+    padding: 4rem 2rem;
+    background: linear-gradient(145deg, #e1f5fe, #b3e5fc);
+    border-radius: 30px 30px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .offers h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #0077ff;
     margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .offers p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
-    color: #555;
+    color: #444;
+    line-height: 1.5;
 }
 
 /* Form Container */
 .form-container {
-    background: #ffffff;
+    background: white;
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    margin-bottom: 3rem;
+    width: 90%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.form-container input, .form-container button {
+.form-container input,
+.form-container button {
     width: 100%;
-    padding: 10px;
+    text-align: center;
+    padding: 12px;
     margin: 0.8rem 0;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid #ddd;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-.form-container input:focus, .form-container button:hover {
+.form-container input:focus {
     border-color: #0077ff;
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.5);
     outline: none;
+}
+
+.form-container button {
+    background: linear-gradient(90deg, #0077ff, #00c6ff);
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4);
 }
 
 /* Offers Container */
@@ -95,33 +122,36 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 /* Offer Card */
 .offer-card {
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .offer-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
 }
 
 .offer-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-bottom: 3px solid #0077ff;
 }
 
 .offer-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 1rem;
     color: #333;
+    text-align: center;
 }
 
 .offer-card p {
@@ -134,38 +164,34 @@ body {
     display: block;
     width: 80%;
     margin: 1rem auto;
-    padding: 0.7rem;
+    padding: 0.8rem;
     border: none;
-    border-radius: 5px;
-    background-color: #0077ff;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #0077ff, #00c6ff);
     color: white;
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
 }
 
 .offer-card button:hover {
-    background-color: #005bbb;
+    background: linear-gradient(90deg, #005bbb, #0077ff);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
 }
 
 /* No Offers Message */
 .no-offers-message {
-    margin-top: 2rem;
-    font-size: 1.5rem;
-    color: #ff6f61;
+    margin-top: 3rem;
+    font-size: 1.6rem;
+    color: #d32f2f;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .navbar .logo {
-        margin-bottom: 1rem;
-    }
-
     .offers-container {
         grid-template-columns: 1fr;
     }
@@ -177,5 +203,10 @@ body {
     .form-container {
         padding: 1rem;
     }
+
+    .offers h1 {
+        font-size: 2.5rem;
+    }
 }
+
 
