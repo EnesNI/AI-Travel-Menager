@@ -1,110 +1,118 @@
-/* General Styles for AI Travel Manager Page */
+/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
+    background: linear-gradient(120deg, #1a1a1d, #4e4e50); /* Darker gradient background */
+    color: #f0f0f0; /* Light text color */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* General Styles for AI Travel Manager Page */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-/* Navbar Styles - Similar to Offer Navbar Style */
+/* Navbar Styles */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: #003366; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background: transparent; /* Dark navy background */
+    
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 4px solid rgba(0, 119, 255, 0.3);
-    border-radius: 0px 0px 30px 30px;
+  
+    border-radius: 0 0 20px 20px;
 }
 
 .navbar .logo {
-    height: 100px; /* Adjusted logo size */
+    height: 130px; /* Adjusted logo size */
     margin-left: 50px;
+    margin-top: 10px;
     width: auto;
     object-fit: contain;
 }
 
+.navbar .logo:hover {
+    transform: scale(1.1);
+}
+
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
-    color: #fff;
+    color: #e0e0e0; /* Soft white */
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.1rem;
-    padding: 0.5rem 1.5rem;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-    background-color: #00d4ff; /* Lighter blue background on hover */
-    color: #003366; /* Dark blue text on hover */
+    background: #005f99; /* Dark teal hover effect */
+    color: #f0f0f0;
     transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .nav-links .active {
-    background-color: #00d4ff; /* Active link color */
-    color: #003366;
+    background: #005f99;
+    color: #f0f0f0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* Main Container for AI Travel Manager Page */
+/* Container Styles */
 .container {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Heading for AI Travel Manager */
 h1 {
     font-size: 3rem;
+    color: #00ace6; /* Bright teal */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
     margin-bottom: 1rem;
-    color: #003366;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
 }
 
-/* Subheading */
 p {
-    font-size: 1.3rem;
-    color: #555;
-    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    color: #dcdcdc; /* Light gray text */
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    max-width: 600px;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-/* Iframe Container */
+/* Iframe Styles */
 .iframe-container {
     width: 100%;
-    max-width: 1000px; /* Limit iframe width */
+    max-width: 1000px;
     margin: 0 auto;
-    border: 2px solid #00d4ff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    padding: 1rem;
+    border: 3px solid #00ace6; /* Bright teal border */
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background: #005f99; /* Dark navy background */
+    animation: zoomIn 0.8s ease-in-out;
 }
 
-/* Chatbot Iframe */
 iframe {
     width: 100%;
     height: 600px;
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive Design */
@@ -112,6 +120,7 @@ iframe {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
+        padding: 1rem;
     }
 
     .nav-links {
@@ -124,6 +133,37 @@ iframe {
     }
 
     iframe {
-        height: 500px;
+        height: 400px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Offers Map</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Transparent Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: absolute; /* Position it on top of the map */
+      width: 100%;
+      z-index: 1000; /* Ensure it stays above the map */
+    }
+
+    .navbar .logo {
+      height: 130px; /* Adjusted logo size */
+    margin-left: 50px;
+    margin-top: 10px;
+    width: auto;
+    object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+    
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.3); /* Lower transparency for links */
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    background-color: #00d4ff; /* Lighter blue background on hover */
+    color: #003366;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links .active {
+    background-color: #00d4ff;
+    color: #003366;
+}
+    /* Map Styles */
+    #map {
+      width: 100%;
+      height: 100vh; /* Fullscreen map */
+    }
+
+    .info-window {
+      font-size: 14px;
+      color: #333;
+      max-width: 250px;
+    }
+
+    .info-window img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .info-window h2 {
+      color: #0077ff;
+      font-size: 16px;
+      margin: 0 0 5px;
+    }
+
+    .info-window p {
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+
+    .info-window button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(90deg, #0077ff, #00c6ff);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .info-window button:hover {
+      background: linear-gradient(90deg, #005bbb, #0077ff);
+    }
+  </style>
+</head>
+<body>
+  <!-- Transparent Navbar -->
+  <nav class="navbar">
+    <img src="logo.png" alt="Logo" class="logo">
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="map.html" class="active">Map</a>
+        <a href="ai-manager.html">AI Travel Manager</a>
+        <a href="offers.html" >Offers</a>
+    </div>
+  </nav>
+
+  <!-- Map -->
+  <div id="map"></div>
+
+  <script>
+    let map;
+
+    const trips = [
+      { title: "Trip to Paris", lat: 48.8566, lng: 2.3522, description: "Enjoy a romantic vacation in the heart of Europe.", price: 1200, image: "paris.jpg", flight: "Direct flight with Air France", hotel: "Hotel Le Meurice", places: "Eiffel Tower, Louvre Museum, Notre-Dame Cathedral" },
+      { title: "Adventure in Japan", lat: 35.6895, lng: 139.6917, description: "Explore the beautiful landscapes and culture of Japan.", price: 1500, image: "japan.jpg", flight: "Direct flight with Japan Airlines", hotel: "The Ritz-Carlton, Tokyo", places: "Mount Fuji, Tokyo Tower, Kyoto Temples" },
+      { title: "Beach Holiday in Bali", lat: -8.3405, lng: 115.092, description: "Relax on the pristine beaches of Bali.", price: 900, image: "bali.jpg", flight: "Direct flight with Garuda Indonesia", hotel: "Bulgari Resort Bali", places: "Uluwatu Temple, Tanah Lot, Ubud Monkey Forest" },
+      { title: "City Break in New York", lat: 40.7128, lng: -74.006, description: "Explore the bustling city that never sleeps.", price: 1500, image: "new-york.jpeg", flight: "Direct flight with Delta Airlines", hotel: "The Plaza Hotel", places: "Times Square, Central Park, Statue of Liberty" },
+      { title: "Tropical Escape to Hawaii", lat: 20.7967, lng: -156.3319, description: "Relax on the beautiful beaches of Hawaii.", price: 2200, image: "hawaii.jpg", flight: "Direct flight with Hawaiian Airlines", hotel: "Four Seasons Resort Maui", places: "Waikiki Beach, Volcanoes National Park, Hana Highway" },
+      { title: "Historical Tour of Rome", lat: 41.9028, lng: 12.4964, description: "Explore the ancient history and architecture of Rome.", price: 1400, image: "rome.webp", flight: "Direct flight with Alitalia", hotel: "Hotel de Russie", places: "Colosseum, Vatican City, Pantheon" },
+      { title: "Aedvnture in Australia", lat: -25.2744, lng: 133.7751, description: "Experience the diverse landscapes and wildlife of Australia.", price: 2800, image: "australia.jpg", flight: "Direct flight with Qantas", hotel: "Park Hyatt Sydney", places: "Great Barrier Reef, Sydney Opera House, Uluru" },
+      { title: "Beach Holiday in the Maldives", lat: 3.2028, lng: 73.2207, description: "Enjoy the pristine beaches and clear waters of the Maldives.", price: 3500, image: "Maldives.jpg", flight: "Direct flight with Qatar Airways", hotel: "Soneva Fushi Resort", places: "Male, Maafushi, Hulhumale" },
+      { title: "Culinary Tour of France", lat: 48.864716, lng: 2.349014, description: "Indulge in the exquisite cuisine and wine of France.", price: 2300, image: "france.jpg", flight: "Direct flight with Air France", hotel: "Hotel Ritz Paris", places: "Paris, Bordeaux, Lyon" },
+      { title: "Nature Retreat in Canada", lat: 56.1304, lng: -106.3468, description: "Immerse yourself in the natural beauty of Canada.", price: 2100, image: "Canada.jpg", flight: "Direct flight with Air Canada", hotel: "Fairmont Banff Springs", places: "Banff National Park, Niagara Falls, Vancouver" },
+      { title: "Island Getaway to Santorini", lat: 36.3932, lng: 25.4615, description: "Relax and unwind on the stunning island of Santorini.", price: 1600, image: "Santorini.webp", flight: "Direct flight with Aegean Airlines", hotel: "Canaves Oia Hotel", places: "Oia, Fira, Akrotiri" },
+      { title: "Adventure in South Africa", lat: -30.5595, lng: 22.9375, description: "Explore the vibrant culture and scenic landscapes of South Africa.", price: 2700, image: "africa.avif", flight: "Direct flight with South African Airways", hotel: "One&Only Cape Town", places: "Cape Town, Kruger National Park, Table Mountain" }
+    ];
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 20, lng: 0 },
+        zoom: 3,
+        minZoom: 2,
+        maxZoom: 18
+      });
+
+      trips.forEach((trip) => {
+        const marker = new google.maps.Marker({
+          position: { lat: trip.lat, lng: trip.lng },
+          map,
+          title: trip.title,
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: createInfoWindowContent(trip),
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    }
+
+    function createInfoWindowContent(trip) {
+      return `
+        <div class="info-window">
+          <img src="${trip.image}" alt="${trip.title}">
+          <h2>${trip.title}</h2>
+          <p>${trip.description}</p>
+          <p><strong>Price:</strong> $${trip.price}</p>
+          <p><strong>Flight details:</strong> ${trip.flight}</p>
+          <p><strong>Hotel:</strong> ${trip.hotel}</p>
+          <p><strong>Places to visit:</strong> ${trip.places}</p>
+          <button onclick="viewMore('${trip.title}')">View More</button>
+        </div>
+      `;
+    }
+
+    function viewMore(title) {
+      alert(`Viewing more details about ${title}!`);
+    }
+  </script>
+
+
+
+  <!-- Google Maps API -->
+  <script src="https://maps.gomaps.pro/maps/api/js?key=AlzaSyBAG0w4170-sHqtFI9jYEQVTWSL10FG6VS&callback=initMap" async defer></script>
+</body>
+</html>
+

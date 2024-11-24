@@ -1,9 +1,11 @@
 /* General Reset */
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif; /* Modern font */
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Subtle gradient */
-    color: #333;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a); /* Sleek dark background */
+    color: #f2f2f2;
+    overflow-x: hidden;
+    line-height: 1.6;
 }
 
 /* Navbar */
@@ -12,109 +14,128 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: rgba(0, 119, 255, 1);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background: transparent; /* Dark navy background */
+    
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 4px solid rgba(0, 119, 255, 0.3);
-    border-radius: 0px 0px 30px 30px;
+  
+    border-radius: 0 0 20px 20px;
 }
 
 .navbar .logo {
-    height: 100px;
+    height: 130px; /* Adjusted logo size */
     margin-left: 50px;
+    margin-top: 10px;
     width: auto;
     object-fit: contain;
 }
 
 .nav-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .nav-links a {
+    color: #e0e0e0; /* Soft white */
     text-decoration: none;
-    color: white;
     font-weight: 600;
-    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+.nav-links a:hover {
+    background: #005f99; /* Dark teal hover effect */
+    color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links .active {
+    background: #005f99;
+    color: #f0f0f0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* Offers Section */
 .offers {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(145deg, #e1f5fe, #b3e5fc);
+    background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
     border-radius: 30px 30px 0 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.9);
 }
 
 .offers h1 {
-    font-size: 3rem;
-    color: #0077ff;
-    margin-bottom: 0.5rem;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    font-size: 3.5rem;
+    color: #00e0ff;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px #00e0ff, 0 0 30px #0077ff;
+    animation: glow 2s infinite alternate;
 }
 
 .offers p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    color: #444;
-    line-height: 1.5;
+    font-size: 1.4rem;
+    color: #b3b3b3;
+    line-height: 1.7;
+}
+
+/* Glowing Animation */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #00e0ff, 0 0 20px #00e0ff, 0 0 30px #0077ff;
+    }
+    100% {
+        text-shadow: 0 0 20px #0077ff, 0 0 40px #00e0ff, 0 0 60px #00e0ff;
+    }
 }
 
 /* Form Container */
 .form-container {
-    background: white;
-    padding: 2rem;
-    border-radius: 30px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    margin-bottom: 3rem;
+    background: #1c1c1c;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 224, 255, 0.2);
+    margin: 3rem auto;
     width: 90%;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    border: 2px solid #0077ff;
 }
 
 .form-container input,
 .form-container button {
     width: 100%;
-    text-align: center;
     padding: 12px;
     margin: 0.8rem 0;
     font-size: 1rem;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
+    border: 1px solid #555;
+    background: #121212;
+    color: #f2f2f2;
     transition: all 0.3s ease;
 }
 
 .form-container input:focus {
-    border-color: #0077ff;
-    box-shadow: 0 0 10px rgba(0, 119, 255, 0.5);
+    border-color: #00e0ff;
+    box-shadow: 0 0 10px #00e0ff;
     outline: none;
 }
 
 .form-container button {
-    background: linear-gradient(90deg, #0077ff, #00c6ff);
+    background: linear-gradient(90deg, #0077ff, #00e0ff);
     color: white;
     font-weight: bold;
     border: none;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .form-container button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #0077ff, 0 0 40px #00e0ff;
 }
 
 /* Offers Container */
@@ -127,37 +148,40 @@ body {
 
 /* Offer Card */
 .offer-card {
-    background: white;
+    background: linear-gradient(145deg, #202020, #1a1a1a);
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 224, 255, 0.2);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
     position: relative;
+    border: 2px solid rgba(0, 224, 255, 0.2);
 }
 
 .offer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(0, 224, 255, 0.6);
+    border-color: #0077ff;
 }
 
 .offer-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-bottom: 3px solid #0077ff;
+    border-bottom: 3px solid #00e0ff;
 }
 
 .offer-card h2 {
     font-size: 1.8rem;
+    color: #00e0ff;
     margin: 1rem;
-    color: #333;
     text-align: center;
+    text-shadow: 0 0 10px rgba(0, 224, 255, 0.7);
 }
 
 .offer-card p {
     font-size: 1rem;
+    color: #b3b3b3;
     margin: 0 1rem 1rem;
-    color: #666;
 }
 
 .offer-card button {
@@ -167,7 +191,7 @@ body {
     padding: 0.8rem;
     border: none;
     border-radius: 25px;
-    background: linear-gradient(90deg, #0077ff, #00c6ff);
+    background: linear-gradient(90deg, #0077ff, #00e0ff);
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -177,7 +201,7 @@ body {
 
 .offer-card button:hover {
     background: linear-gradient(90deg, #005bbb, #0077ff);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3);
     transform: translateY(-3px);
 }
 
@@ -185,28 +209,7 @@ body {
 .no-offers-message {
     margin-top: 3rem;
     font-size: 1.6rem;
-    color: #d32f2f;
+    color: #ff4d4d;
     font-weight: bold;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
 }
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .offers-container {
-        grid-template-columns: 1fr;
-    }
-
-    .offer-card {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-container {
-        padding: 1rem;
-    }
-
-    .offers h1 {
-        font-size: 2.5rem;
-    }
-}
-
-

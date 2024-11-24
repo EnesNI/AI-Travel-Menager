@@ -6,154 +6,170 @@
     <title>Offers</title>
     <link rel="stylesheet" href="offers.css">
     <style>
-        /* Fullscreen Modal */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Dark background with more opacity */
-            z-index: 1000;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.5s ease-out;
-        }
+       /* Fullscreen Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Darker background with higher opacity */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-out;
+}
 
-        /* Modal Content */
-        .modal-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            width: 80%;
-            max-width: 1200px;
-            height: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); /* Soft shadow */
-            animation: slideUp 0.5s ease-out;
-            position: relative;
-        }
+/* Modal Content */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    max-width: 1200px;
+    background: linear-gradient(145deg, #1b1b1b, #232323); /* Futuristic dark background */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 119, 255, 0.6); /* Glow effect */
+    animation: slideUp 0.5s ease-out;
+    position: relative;
+    border: 2px solid rgba(0, 119, 255, 0.5); /* Glowing border */
+}
 
-        .modal-header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+/* Modal Header */
+.modal-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(0, 119, 255, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
 
-        .modal-header h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #0077ff;
-        }
+.modal-header h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00e0ff;
+    text-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+}
 
-        .close-modal {
-            font-size: 2.5rem;
-            color: #ff6f61;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
+.close-modal {
+    font-size: 2.5rem;
+    color: #ff6f61;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .close-modal:hover {
-            color: #ff3333;
-        }
+.close-modal:hover {
+    color: #ff3333;
+    transform: scale(1.2);
+}
 
-        /* Modal Body */
-        .modal-body {
-            display: flex;
-            width: 100%;
-        }
+/* Modal Body */
+.modal-body {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-        .modal-image {
-            width: 45%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 5px solid #0077ff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow around the image */
-            transition: transform 0.3s ease;
-        }
+/* Modal Image */
+.modal-image {
+    width: 40%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 5px solid rgba(0, 224, 255, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 224, 255, 0.6); /* Glow effect */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
 
-        .modal-image:hover {
-            transform: scale(1.05); /* Hover effect for image */
-        }
+.modal-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 224, 255, 0.8), 0 0 40px rgba(0, 224, 255, 1);
+}
 
-        .modal-info {
-            flex: 1;
-            color: #333;
-            padding-left: 30px;
-            text-align: left;
-        }
+/* Modal Info Section */
+.modal-info {
+    flex: 1;
+    padding: 20px;
+    color: #f2f2f2;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-        .modal-info h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #0077ff;
-        }
+.modal-info h2 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #00e0ff;
+    text-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+}
 
-        .modal-info p {
-            font-size: 1.4rem;
-            margin: 10px 0;
-            line-height: 1.6;
-            color: #555;
-        }
+.modal-info p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    line-height: 1.7;
+    color: #cccccc;
+}
 
-        .modal-info p strong {
-            color: #0077ff; /* Accent color for price and total */
-            font-weight: bold;
-        }
+.modal-info p strong {
+    color: #00e0ff;
+    font-weight: bold;
+}
 
-        /* Book Now Button */
-        .book-now-btn {
-            display: block;
-            width: 80%;
-            margin: 1rem auto;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(90deg, #0077ff, #00c6ff);
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+/* Book Now Button */
+.book-now-btn {
+    display: block;
+    width: 70%;
+    margin: 1.5rem auto;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #0077ff, #00e0ff);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4), 0 0 20px rgba(0, 224, 255, 0.6);
+    transition: all 0.4s ease;
+}
 
-        .book-now-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.4);
-        }
+.book-now-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 119, 255, 0.6), 0 0 40px rgba(0, 224, 255, 1);
+    background: linear-gradient(90deg, #005bbb, #0077ff);
+}
 
-        /* Modal Fade-in and Slide-up Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -162,6 +178,7 @@
         <img src="logo.png" alt="Logo" class="logo">
         <div class="nav-links">
             <a href="index.html">Home</a>
+            <a href="map.html" class="btn">Map</a>
             <a href="ai-manager.html">AI Travel Manager</a>
             <a href="offers.html" class="active">Offers</a>
         </div>

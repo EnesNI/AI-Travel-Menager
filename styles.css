@@ -33,8 +33,9 @@ body {
 }
 
 .navbar .logo {
-    height: 100px; /* Adjusted logo size */
+    height: 130px; /* Adjusted logo size */
     margin-left: 50px;
+    margin-top: 10px;
     width: auto;
     object-fit: contain;
 }
@@ -45,6 +46,7 @@ body {
 }
 
 .nav-links a {
+    
     color: #fff;
     text-decoration: none;
     font-weight: bold;
